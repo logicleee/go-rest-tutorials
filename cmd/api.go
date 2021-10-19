@@ -25,11 +25,20 @@ var albums = []album{
 
 func main() {
 	router := gin.Default()
+	router.GET("/", getHello)
 	router.GET("/albums", getAlbums)
 	router.GET("/albums/:id", getAlbumByID)
 	router.POST("/albums", postAlbums)
 
-	router.Run("localhost:8080")
+	// for local testing
+	//router.Run("localhost:8080")
+
+	// docker
+	router.Run("0.0.0.0:8080")
+}
+
+func getHello(c *gin.Context) {
+	c.IndentedJSON(http.StatusOK, gin.H{"message": "hellow world"})
 }
 
 // getAlbums responder
